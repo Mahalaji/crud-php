@@ -10,7 +10,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname) or die("conne
 if (isset($_SESSION['id']) && isset($_POST['oldpassword'])) {
      $oldpassword = $_POST['oldpassword'];
      $encryptpass = sha1($oldpassword);
-    $id = $_SESSION['id'];
+    $id = $_GET['id'];
     
     $sql = "SELECT * FROM `customer`WHERE id='$id' and password ='$encryptpass';";
    
@@ -28,7 +28,7 @@ if (isset($_SESSION['id']) && isset($_POST['oldpassword'])) {
           $encryptpass = sha1($oldpassword);
             $password = $_POST['Newpassword'];
             $encryptpassword = sha1($password);
-            $id = $_SESSION['id'];
+            $id = $_GET['id'];
 
             $sql = "UPDATE `customer` SET `password` = '$encryptpassword' WHERE `id` = $id;";
             // print_r($sql);die;
@@ -47,6 +47,12 @@ if (isset($_SESSION['id']) && isset($_POST['oldpassword'])) {
         echo "<script> alert('Incorrect old password'); </script>";
     }
 }
+//for fetch data
+$id = $_GET['id'];
+
+$sql = "SELECT *  FROM `customer` WHERE `id` = '$id';";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
 ?>
 <?php
 
@@ -67,7 +73,7 @@ if (isset($_POST['Logout'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Change password</title>
-    <link rel="stylesheet" type="text/css" href="css files/password.css">
+    <link rel="stylesheet" type="text/css" href="css files/user-detail-password.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 
@@ -76,10 +82,17 @@ if (isset($_POST['Logout'])) {
     <?php include('sidebar.php') ?>
     <div class="main_content">
         <div class="header">welcome
-        <form id="log" align="right" method="post">
-            <button name="Logout" style="padding: 7px;
-    border-radius: 9px;">Log out</button>
-        </form>  
+        <div class="dropdown">
+         <button class="Account">Account</button>
+         <div class="dropdown-content">
+         <a href="profile.php"><i class="fas fa-user"></i>Profile</a>
+         <a href="password.php">password</a>
+         <form method="POST">
+            <button name="Logout" id="log1">Log Out</button>
+         </form>
+        
+         </div>
+         </div>  
         </div>  
         
     
@@ -87,6 +100,7 @@ if (isset($_POST['Logout'])) {
     <div class="input-group">
             <label>Old password</label>
             <input type="password" id="oldpassword" name="oldpassword">
+            <input type="hidden" id="id" name="id" value="<?php echo $row['id']; ?>">
             <p id="oldpass" style="color: red;"></p>
         </div>
 

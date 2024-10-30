@@ -11,7 +11,7 @@ document.getElementById("update").addEventListener("submit", function (event) {
     const mobilenumber = document.getElementById("mobilenumber").value;
     const city = document.getElementById("city").value;
     const state = document.getElementById("state").value;
-    const country = document.getElementById("country").value;
+    // const country = document.getElementById("country").value;
     const pincode = document.getElementById("pincode").value;
     const address = document.getElementById("address").value;
   
@@ -76,12 +76,12 @@ document.getElementById("update").addEventListener("submit", function (event) {
     else {
         document.getElementById('statee').innerHTML = '';
     }
-    if (country == '') {
-        document.getElementById('countrye').innerHTML = "country is required."
-    } 
-    else {
-        document.getElementById('countrye').innerHTML = '';
-    }
+    // if (country == '') {
+    //     document.getElementById('countrye').innerHTML = "country is required."
+    // } 
+    // else {
+    //     document.getElementById('countrye').innerHTML = '';
+    // }
     if (pincode == '') {
         document.getElementById('pincodee').innerHTML = "pincode is required."
     } 
@@ -90,7 +90,7 @@ document.getElementById("update").addEventListener("submit", function (event) {
     }
 
 
-    if (username == '' || password == '' || confirm_password == '' || email == ''|| password.length < 8 || confirm_password != password ||pincode == '' ||mobilenumber == '' ||city == '' |state == '' ||country == ''||address == '') {
+    if (username == '' || password == '' || confirm_password == '' || email == ''|| password.length < 8 || confirm_password != password ||pincode == '' ||mobilenumber == '' ||city == '' |state == '' ||address == '') {
         event.preventDefault();
         }
 });

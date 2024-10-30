@@ -24,6 +24,7 @@ if (isset($_POST['username']) && isset($_POST['password']))
         $cdd=mysqli_fetch_assoc($result);
         if(isset($cdd['id'])){
             $id = $cdd['id'];
+            $_SESSION['id'] = "$id";
         }
         else{
             print_r(" ");
@@ -37,7 +38,7 @@ if (isset($_POST['username']) && isset($_POST['password']))
         {    
          $_SESSION['username'] = "$username";
          $_SESSION['password'] = "$encryptpassword";  
-         $_SESSION['id'] = "$id";
+        
         
 
          header('location: Dashboard.php');           
@@ -54,7 +55,7 @@ if (isset($_POST['username']) && isset($_POST['password']))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration form</title>
-    <link rel="stylesheet" type="text/css" href="loginstyle.css">
+    <link rel="stylesheet" type="text/css" href="css files/loginstyle.css">
 </head>
 
 <body>

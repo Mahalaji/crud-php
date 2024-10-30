@@ -11,16 +11,6 @@ if (isset($_POST['Logout'])) {
 }
 ?>
 <?php
-if (isset($_POST['Add-User'])) {
-    header('location: add-member.php');
-}
-?>
-<?php
-if (isset($_POST['User-Salary'])) {
-    header('location: salary.php');
-}
-?>
-<?php
 $con = mysqli_connect("localhost", "root", "", "user_details") or die("connection failed");
 
 // delete data
@@ -48,45 +38,36 @@ $result = mysqli_query($con, $sql);
 ?>
 
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-<link rel="stylesheet" type="text/css" href="css files/users.css">
-<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-
+<link rel="stylesheet" type="text/css" href="css files/salary.css">
 <div class="wrapper">
     <?php include('sidebar.php') ?>
     <div class="main_content">
         <div class="header">Welcome
-        <div class="dropdown">
+            <div class="dropdown">
          <button class="Account">Account</button>
          <div class="dropdown-content">
          <a href="profile.php"><i class="fas fa-user"></i>Profile</a>
          <a href="password.php">password</a>
          <form method="POST">
-            <button name="Logout" id="log">Log Out</button>
+            <button name="Logout" id="log1">Log Out</button>
          </form>
         
          </div>
-         </div>
+         </div>  
         </div>
-        <div class="info" style=" background: white;" height="auto;">
+        <div class="info" style=" background: white;">
 
 
-            <div class="header" style=" background: white;">
-                <h1 id="user">User-List
-                <form align="right" method="post">
-                <button name="Add-User" style="padding: 7px;
-    border-radius: 9px;   background: azure;">Add-User</button>
-     <form align="right" method="post">
-                <button name="User-Salary" style="padding: 7px;
-    border-radius: 9px;   background: azure;">User-Salary</button>
-                </h1>
+            <div class="header"
+            style=" background: white;">
+                <h1>Salary-List</h1>
                 <table>
                     <tr>
                         <th>S.no</th>
                         <th>name</th>
-                        <th>email</th>
+                        <th>salary</th>
                         <th>edit</th>
-                        <th>delete</th>
-                        <th>Password-Change</th>
+                       
                     </tr>
                     <tr>
                         <?php
@@ -97,17 +78,11 @@ $result = mysqli_query($con, $sql);
                         ?>
                             <td> <?php echo $start_serial++; ?></td>
                             <td> <?php echo $row['name']; ?></td>
-                            <td> <?php echo $row['email']; ?></td>
-                            <td> <a href="http://localhost//mahala/login/user-detail-edit.php?id=<?php echo $row['id'] ?>" class="btn btn-primary">edit</a></td>
-                            <td>
-                                <form action="#" method="POST">
-                                    <button type="submit" class="btn" name="delete" value="<?php echo $row['id'] ?>" style="    padding: 5px;
-                                       background: azure;
-                                       border-radius: 7px;
-                                       border: 1px solid grey;">delete</button>
-                                </form>
-                            </td>
-                            <td> <a href="http://localhost//mahala/login/user-detail-password.php?id=<?php echo $row['id'] ?>" class="btn btn-danger">change</a></td>
+                            <td> <?php echo $row['salary']; ?></td>
+                            <td> <a href="http://localhost//mahala/login/salary-edit.php?id=<?php echo $row['id'] ?>" class="btn btn-primary">edit</a></td>
+                          
+                          
+                            
                     </tr>
                 <?php
                         }
@@ -128,7 +103,7 @@ $result = mysqli_query($con, $sql);
                         } else {
                             $active = "";
                         }
-                        echo '<a class="' . $active . '" href="users.php?page=' . $i . '">' . $i . '</a>';
+                        echo '<a class="' . $active . '" href="salary.php?page=' . $i . '">' . $i . '</a>';
                     }
                     echo '</div>';
                 }

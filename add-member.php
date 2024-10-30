@@ -58,130 +58,9 @@ if (isset($_POST["reg_user"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration system PHP and MySQL</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css files/add-member.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            list-style: none;
-            text-decoration: none;
-            font-family: 'Josefin Sans', sans-serif;
-        }
-
-        body {
-            background-color: #f3f5f9;
-        }
-
-        #regi {
-            margin: 2rem 1rem;
-        }
-
-        #img {
-            margin: 0 1rem 2rem;
-            /* width: 3rem; */
-            /* height: 3rem; */
-        }
-
-        .wrapper {
-            display: flex;
-            position: relative;
-        }
-
-        .wrapper .sidebar {
-            width: 200px;
-            height: 100%;
-            background: #343a40;
-            padding: 0px 0px;
-            position: fixed;
-        }
-
-        .wrapper .sidebar h2 {
-            color: #fff;
-            text-transform: uppercase;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .wrapper .sidebar ul li {
-            padding: 15px;
-            border-bottom: 1px solid #bdb8d7;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .wrapper .sidebar ul li a {
-            color: #bdb8d7;
-            display: block;
-        }
-
-        .wrapper .sidebar ul li a .fas {
-            width: 25px;
-        }
-
-        .wrapper .sidebar ul li:hover {
-            background-color: #594f8d;
-        }
-
-        .wrapper .sidebar ul li:hover a {
-            color: #fff;
-        }
-
-        .wrapper .sidebar .social_media {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-        }
-
-        .wrapper .sidebar .social_media a {
-            display: block;
-            width: 40px;
-            background: #594f8d;
-            height: 40px;
-            line-height: 45px;
-            text-align: center;
-            margin: 0 5px;
-            color: #bdb8d7;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
-        }
-
-        .wrapper .main_content {
-            width: 100%;
-            margin-left: 200px;
-        }
-
-        .wrapper .main_content .header {
-            padding: 20px;
-            background: #343a40;
-            color: #717171;
-            border-bottom: 1px solid #e0e4e8;
-            margin-top: 0px;
-            width: auto;
-            text-align: left;
-        }
-
-        .wrapper .main_content .info {
-            margin: 20px;
-            color: #717171;
-            line-height: 25px;
-        }
-
-        .wrapper .main_content .info div {
-            margin-bottom: 20px;
-        }
-
-        @media (max-height: 500px) {
-            .social_media {
-                display: none !important;
-            }
-        }
-    </style>
+ 
 </head>
 
 <body>
@@ -189,13 +68,20 @@ if (isset($_POST["reg_user"])) {
         <?php include('sidebar.php') ?>
         <div class="main_content">
             <div class="header">Welcome
-            <form id="log" align="right" method="post">
-            <button name="Logout" style="padding: 7px;
-    border-radius: 9px;">Log out</button>
-        </form>    
+            <div class="dropdown">
+         <button class="Account">Account</button>
+         <div class="dropdown-content">
+         <a href="profile.php"><i class="fas fa-user"></i>Profile</a>
+         <a href="password.php">password</a>
+         <form method="POST">
+            <button name="Logout" id="log1">Log Out</button>
+         </form>
+        
+         </div>
+         </div>   
             </div>
 
-            <h2 id="regi">Add Member</h2>
+            <h2 id="regi">Add User</h2>
 
 
             <form id="update"  method="post">
@@ -230,6 +116,7 @@ if (isset($_POST["reg_user"])) {
                         </div>
                     </div>
                     <div>
+                   
                         <div class="input-group">
                             <label>city</label>
                             <input type="text" id="city" name="city" >
@@ -249,7 +136,19 @@ if (isset($_POST["reg_user"])) {
                         </div>
                         <div class="input-group">
                             <label>Country</label>
-                            <input type="text" id="country" name="country" >
+                            
+                            <select id="countr" name="country">
+                                <?php
+                                $sql2="select * from country_list;";
+                                $country=mysqli_query($conn,$sql2);
+                                // $c=mysqli_fetch_array($country);
+                                while($c=mysqli_fetch_array($country)){
+                                ?>
+                                <option value="<?php echo $c['id'] ?>"><?php echo $c['country'] ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
                             <p id="countrye" style="color: red;"></p>
 
                         </div>
@@ -262,13 +161,13 @@ if (isset($_POST["reg_user"])) {
                     </div>
                 </div>
                 <div class="input-group">
-                    <button type="submit" class="btn" name="reg_user">Add Member</button>
+                    <button type="submit" class="btn" name="reg_user">Add User</button>
                 </div>
 
 
 
             </form>
-            <script src="add-member.js"></script>
+            <script src="js file/add-member.js"></script>
             <script> 
                 function lettersOnly(input){
                     var regex = /[^a-z ]/gi;

@@ -1,0 +1,19 @@
+         <tr>
+                             <?php
+                            while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                                <div class="post-image">
+                                 <img src="image/<?php echo $row['image'] ?>"/></div>
+                                <div class="post-content">
+                                    <h3><?php echo $row['Title']; ?></h3>
+                                    <p><?php echo $row['Description']; ?></p>
+                                    <p> Create Date: <?php echo $row['Create Date']; ?></p>
+                                    <p> Update Date: <?php echo $row['Update Date']; ?></p>
+
+                                    <a href="#" class="read-more">Read More</a>
+                                </div>
+                    <?php
+                            }
+                    ?>
+                    style="
+                    width: -webkit-fill-available;
